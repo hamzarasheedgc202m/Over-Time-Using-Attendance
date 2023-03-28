@@ -1,0 +1,54 @@
+Sure! Here's a complete Python code example for keeping track of attendance over time using a Student class:
+
+python
+Copy code
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.attendance = {}
+
+    def mark_attendance(self, date, status):
+        self.attendance[date] = status
+
+    def get_attendance(self):
+        return self.attendance
+
+
+class AttendanceTracker:
+    def __init__(self, students):
+        self.students = {}
+        for student in students:
+            self.students[student] = Student(student)
+
+    def mark_attendance(self, student, date, status):
+        self.students[student].mark_attendance(date, status)
+
+    def get_attendance(self, student):
+        return self.students[student].get_attendance()
+
+    def get_total_attendance(self, date):
+        total_present = 0
+        total_absent = 0
+        for student in self.students.values():
+            if date in student.attendance:
+                if student.attendance[date] == "present":
+                    total_present += 1
+                elif student.attendance[date] == "absent":
+                    total_absent += 1
+        return total_present, total_absent
+
+
+# Example usage
+students = ["Alice", "Bob", "Charlie"]
+tracker = AttendanceTracker(students)
+
+# Mark attendance for Alice and Bob on March 27
+tracker.mark_attendance("Alice", "2023-03-27", "present")
+tracker.mark_attendance("Bob", "2023-03-27", "absent")
+
+# Get Alice's attendance for all dates
+print(tracker.get_attendance("Alice"))  # {'2023-03-27': 'present'}
+
+# Get the total attendance for all students on March 27
+total_present, total_absent = tracker.get_total_attendance("2023-03-27")
+print(f"Present: {total_present}, Absent: {total_absent}")  # Present: 1, Absent: 1
