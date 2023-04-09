@@ -1,6 +1,4 @@
-Sure! Here's a complete Python code example for keeping track of attendance over time using a Student class:
 
-python
 Copy code
 class Student:
     def __init__(self, name):
