@@ -1,0 +1,68 @@
+# roll no : F22BSEEN1E02070
+# NAME: HAMZA RASHEED 
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def display(self):
+        print("Name:", self.name)
+        print("Age:", self.age)
+
+
+class Student(Person):
+    def __init__(self, name, age, student_id):
+        super().__init__(name, age)
+        self.student_id = student_id
+
+    def display(self):
+        print("Student ID:", self.student_id)
+        super().display()
+
+
+class Teacher(Person):
+    def __init__(self, name, age, subject):
+        super().__init__(name, age)
+        self.subject = subject
+
+    def display(self):
+        print("Subject:", self.subject)
+        super().display()
+
+
+class Attendance:
+    def __init__(self):
+        self.attendance_data = {}
+
+    def mark_attendance(self, person):
+        if isinstance(person, Student) or isinstance(person, Teacher):
+            if person.name not in self.attendance_data:
+                self.attendance_data[person.name] = True
+                print(person.name, "is marked as present.")
+            else:
+                print(person.name, "is already marked as present.")
+        else:
+            print("Invalid person type.")
+
+    def display_attendance(self):
+        print("Attendance:")
+        for name, present in self.attendance_data.items():
+            print(name, "is present." if present else "is absent.")
+
+
+# Usage Example
+# Create Persons
+person1 = Person("John", 25)
+student1 = Student("Alice", 20, "S1234")
+teacher1 = Teacher("Mr. Smith", 40, "Mathematics")
+
+# Create Attendance Tracker
+attendance_tracker = Attendance()
+
+# Mark Attendance
+attendance_tracker.mark_attendance(person1)
+attendance_tracker.mark_attendance(student1)
+attendance_tracker.mark_attendance(teacher1)
+
+# Display Attendance
+attendance_tracker.display_attendance()
